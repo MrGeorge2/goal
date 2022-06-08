@@ -19,3 +19,18 @@ func TestForEach(t *testing.T) {
 	assert.Equal(t, len(numbers), len(numbersToCopy))
 	assert.Equal(t, numbers, numbersToCopy)
 }
+
+func TestForEachSum(t *testing.T) {
+	numbers := goalist.Goalist[int]{}
+
+	const SUM = 15
+	const ONE = 1
+	for i := 0; i < SUM; i++ {
+		numbers.Add(ONE)
+	}
+
+	sum := 0
+	numbers.ForEach(func(x int) {
+		sum += x
+	})
+}
