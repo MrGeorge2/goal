@@ -1,6 +1,6 @@
-package list
+package goalist
 
-func (l List[T]) First(predicate func(x T) bool) *T {
+func (l Goalist[T]) First(predicate func(x T) bool) *T {
 	var result *T = nil
 
 	for _, item := range l {

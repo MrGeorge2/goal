@@ -4,7 +4,7 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/MrGeorge2/goal/list"
+	"github.com/MrGeorge2/goal/goalist"
 )
 
 type Car struct {
@@ -13,8 +13,8 @@ type Car struct {
 	IsNew bool
 }
 
-func CreateOrderedCarList() list.List[Car] {
-	cars := list.List[Car]{}
+func CreateOrderedCarList() goalist.Goalist[Car] {
+	cars := goalist.Goalist[Car]{}
 
 	cars = append(cars, Car{
 		ID:    1,
@@ -49,7 +49,7 @@ func CreateOrderedCarList() list.List[Car] {
 	return cars
 }
 
-func CreateShuffledCarList() list.List[Car] {
+func CreateShuffledCarList() goalist.Goalist[Car] {
 	carList := CreateOrderedCarList()
 	rand.Seed(time.Now().UnixNano())
 	rand.Shuffle(len(carList), func(i, j int) { carList[i], carList[j] = carList[j], carList[i] })

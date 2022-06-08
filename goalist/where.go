@@ -1,7 +1,7 @@
-package list
+package goalist
 
-func (l List[T]) Where(predicate func(x T) bool) List[T] {
-	result := List[T]{}
+func (l Goalist[T]) Where(predicate func(x T) bool) Goalist[T] {
+	result := Goalist[T]{}
 
 	for _, item := range l {
 		if predicate(item) {

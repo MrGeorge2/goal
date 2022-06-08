@@ -1,4 +1,4 @@
-package testlist
+package testgoalist
 
 import (
 	"testing"
@@ -11,9 +11,9 @@ func TestAddRange(t *testing.T) {
 	carList := seeder.CreateShuffledCarList()
 	carListLen := len(carList)
 
-	listToAppend := seeder.CreateShuffledCarList()
-	listAppendLen := len(listToAppend)
+	goalistToAppend := seeder.CreateShuffledCarList()
+	goalistAppendLen := len(goalistToAppend)
 
-	carList.AddRange(listToAppend)
-	assert.Len(t, carList, carListLen+listAppendLen)
+	carList.AddRange(goalistToAppend)
+	assert.Len(t, carList, carListLen+goalistAppendLen)
 }

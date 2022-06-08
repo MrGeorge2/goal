@@ -1,6 +1,6 @@
-package list
+package goalist
 
-func (l List[T]) IndexOf(value T) *int {
+func (l Goalist[T]) IndexOf(value T) *int {
 	for i, item := range l {
 		if item == value {
 			return &i

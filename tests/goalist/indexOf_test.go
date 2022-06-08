@@ -1,4 +1,4 @@
-package testlist
+package testgoalist
 
 import (
 	"testing"
@@ -7,8 +7,9 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestContains(t *testing.T) {
+func TestIndexOf(t *testing.T) {
 	carList := seeder.CreateShuffledCarList()
+	originalLen := len(carList)
 
 	newCar := seeder.Car{
 		Brand: "Volvo",
@@ -18,5 +19,7 @@ func TestContains(t *testing.T) {
 
 	carList.Add(newCar)
 
-	assert.True(t, carList.Contains(newCar))
+	index := carList.IndexOf(newCar)
+	assert.NotNil(t, index)
+	assert.Equal(t, originalLen, *index)
 }

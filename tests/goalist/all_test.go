@@ -1,4 +1,4 @@
-package testlist
+package testgoalist
 
 import (
 	"testing"
