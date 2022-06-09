@@ -1,5 +1,6 @@
 package goalist
 
+// Remove duplicite items from goalist
 func (l Goalist[T]) Distinct() Goalist[T] {
 	result := Goalist[T]{}
 

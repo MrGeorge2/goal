@@ -1,5 +1,6 @@
 package goalist
 
+// Returs union of both actual Goalist and Goalist from parameter
 func (l Goalist[T]) Union(unionList Goalist[T]) Goalist[T] {
 	result := l.Distinct()
 

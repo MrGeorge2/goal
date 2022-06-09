@@ -1,5 +1,6 @@
 package goalist
 
+// Remove items from actual Goalist that are in parameter of method
 func (l Goalist[T]) Except(exceptList Goalist[T]) Goalist[T] {
 	result := Goalist[T]{}
 

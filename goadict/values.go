@@ -2,6 +2,7 @@ package goadict
 
 import "github.com/MrGeorge2/goal/goalist"
 
+// Rerutns all values from dictionary
 func (d Goadict[K, T]) Values() goalist.Goalist[T] {
 	values := make(goalist.Goalist[T], 0, len(d))
 

@@ -1,5 +1,7 @@
 package goalist
 
-func (l *Goalist[T]) Add(object T) {
-	*l = append(*l, object)
+// Add item to goalist
+// Mutate the goalist
+func (l *Goalist[T]) Add(item T) {
+	*l = append(*l, item)
 }

@@ -1,5 +1,6 @@
 package goalist
 
+// Returns enumerable
 func (l Goalist[T]) GetEnumerator() func() *T {
 	i := 0
 
