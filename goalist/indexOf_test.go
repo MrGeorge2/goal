@@ -4,26 +4,16 @@ import (
 	"testing"
 
 	"github.com/MrGeorge2/goal/goalist"
-	"github.com/MrGeorge2/goal/tests/seeder"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestIndexOfExisting(t *testing.T) {
-	carList := seeder.CreateShuffledCarList()
-	originalLen := len(carList)
+	const ZERO = 0
+	numbers := goalist.Goalist[int]{ZERO, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 
-	// Existing
-	newCar := seeder.Car{
-		Brand: "Volvo",
-		IsNew: true,
-		ID:    1024,
-	}
-
-	carList.Add(newCar)
-
-	index := carList.IndexOf(newCar)
+	index := numbers.IndexOf(ZERO)
 	assert.NotNil(t, index)
-	assert.Equal(t, originalLen, *index)
+	assert.Equal(t, 0, *index)
 }
 
 func TestIndexOfNotExistig(t *testing.T) {

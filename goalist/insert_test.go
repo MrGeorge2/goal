@@ -3,30 +3,24 @@ package goalist_test
 import (
 	"testing"
 
-	"github.com/MrGeorge2/goal/tests/seeder"
+	"github.com/MrGeorge2/goal/goalist"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestPrepend(t *testing.T) {
-	insertToIndex(t, 0)
-	insertToIndex(t, 1)
-	insertToIndex(t, 3)
+	const ZERO = 0
+	numbers := goalist.Goalist[int]{1, 2, 3, 4, 5}
+	insertToIndex(t, 0, numbers, ZERO)
+	insertToIndex(t, 1, numbers, ZERO)
+	insertToIndex(t, len(numbers)-1, numbers, ZERO)
 }
 
-func insertToIndex(t *testing.T, index uint) {
-	carList := seeder.CreateShuffledCarList()
+func insertToIndex[T comparable](t *testing.T, index int, lst goalist.Goalist[T], value T) {
+	originalLen := len(lst)
 
-	originalCarList := len(carList)
+	lst.Insert(index, value)
 
-	newCar := seeder.Car{
-		Brand: "BMW",
-		ID:    1000,
-		IsNew: false,
-	}
+	assert.Len(t, lst, originalLen+1)
 
-	carList.Insert(index, newCar)
-
-	assert.Len(t, carList, originalCarList+1)
-
-	assert.Equal(t, newCar, carList[index])
+	assert.Equal(t, value, lst[index])
 }
