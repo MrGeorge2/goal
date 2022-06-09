@@ -44,4 +44,4 @@ Goadict implement methods
     <li>Count</li>
 </ul>
 
-Released under the [MIT License](https://github.com/go-gorm/gorm/blob/master/License)
+Released under the [MIT License](https://github.com/MrGeorge2/goal/blob/main/LICENSE)
