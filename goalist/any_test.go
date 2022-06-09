@@ -3,18 +3,16 @@ package goalist_test
 import (
 	"testing"
 
-	"github.com/MrGeorge2/goal/tests/seeder"
+	"github.com/MrGeorge2/goal/goalist"
 	"github.com/stretchr/testify/assert"
 )
 
-func TestAny(t *testing.T) {
-	carList := seeder.CreateShuffledCarList()
+func TestAnyExists(t *testing.T) {
+	numbers := goalist.Goalist[int]{0, 1, 2, 3, 4, 5}
+	assert.True(t, numbers.Any(func(x int) bool { return x == 0 }))
+}
 
-	const CAR_IN_LIST = "Skoda"
-	hasSkoda := carList.Any(func(x seeder.Car) bool { return x.Brand == CAR_IN_LIST })
-	assert.True(t, hasSkoda)
-
-	const CAR_NOT_IN_LIST = "Lada"
-	hasLada := carList.Any(func(x seeder.Car) bool { return x.Brand == CAR_NOT_IN_LIST })
-	assert.False(t, hasLada)
+func TestNotAnyExists(t *testing.T) {
+	numbers := goalist.Goalist[int]{0, 1, 2, 3, 4, 5}
+	assert.False(t, numbers.Any(func(x int) bool { return x == 1024 }))
 }

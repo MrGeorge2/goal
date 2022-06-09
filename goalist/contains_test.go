@@ -3,20 +3,16 @@ package goalist_test
 import (
 	"testing"
 
-	"github.com/MrGeorge2/goal/tests/seeder"
+	"github.com/MrGeorge2/goal/goalist"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestContains(t *testing.T) {
-	carList := seeder.CreateShuffledCarList()
+	numbers := goalist.Goalist[int]{1, 2, 3, 4, 5}
+	assert.True(t, numbers.Contains(1))
+}
 
-	newCar := seeder.Car{
-		Brand: "Volvo",
-		IsNew: true,
-		ID:    1024,
-	}
-
-	carList.Add(newCar)
-
-	assert.True(t, carList.Contains(newCar))
+func TestNotContains(t *testing.T) {
+	numbers := goalist.Goalist[int]{1, 2, 3, 4, 5}
+	assert.False(t, numbers.Contains(1024))
 }

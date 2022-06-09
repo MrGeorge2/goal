@@ -3,20 +3,35 @@ package goalist_test
 import (
 	"testing"
 
-	"github.com/MrGeorge2/goal/tests/seeder"
+	"github.com/MrGeorge2/goal/goalist"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestRemoveAt(t *testing.T) {
-	cars := seeder.CreateShuffledCarList()
+	testRemoveAtIndex(t, goalist.Goalist[int]{0, 1, 2, 3, 4, 5}, 0)
+	testRemoveAtIndex(t, goalist.Goalist[int]{0, 1, 2, 3, 4, 5}, 1)
+	testRemoveAtIndex(t, goalist.Goalist[int]{0, 1, 2, 3, 4, 5}, len(goalist.Goalist[int]{0, 1, 2, 3, 4, 5})-1)
+}
 
-	for _, item := range cars {
-		index := cars.IndexOf(item)
-		assert.NotNil(t, index)
+func testRemoveAtIndex(t *testing.T, lst goalist.Goalist[int], index int) {
+	var originalLst goalist.Goalist[int]
+	copy(originalLst, lst)
 
-		cars.RemoveAt(*index)
-		assert.False(t, cars.Contains(item))
+	// Test element is removed
+	elementAtIndex := lst[index]
+
+	assert.True(t, lst.Contains(elementAtIndex))
+
+	lst.RemoveAt(index)
+
+	assert.False(t, lst.Contains(elementAtIndex))
+
+	// Test order
+	for i, _ := range originalLst {
+		if len(lst) >= i {
+			continue
+		}
+
+		assert.Equal(t, originalLst[i], lst[i+1])
 	}
-
-	assert.Len(t, cars, 0)
 }

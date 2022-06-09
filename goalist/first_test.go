@@ -3,18 +3,31 @@ package goalist_test
 import (
 	"testing"
 
-	"github.com/MrGeorge2/goal/tests/seeder"
+	"github.com/MrGeorge2/goal/goalist"
 	"github.com/stretchr/testify/assert"
 )
 
-func TestFirst(t *testing.T) {
-	carList := seeder.CreateShuffledCarList()
+func TestFirstExist(t *testing.T) {
+	const ZERO = 0
 
-	const CAR_IN_LIST = "Skoda"
-	firstSkoda := carList.First(func(x seeder.Car) bool { return x.Brand == CAR_IN_LIST })
-	assert.NotNil(t, firstSkoda)
+	numbers := goalist.Goalist[int]{ZERO, 1, 2, 3, 4, 5}
+	firstZero := numbers.First(func(x int) bool { return x == ZERO })
+	assert.NotNil(t, firstZero)
+	assert.Equal(t, ZERO, *firstZero)
+}
 
-	const CAR_NOT_IN_LIST = "Lada"
-	firstLada := carList.First(func(x seeder.Car) bool { return x.Brand == CAR_NOT_IN_LIST })
-	assert.Nil(t, firstLada)
+func TestMultipleExists(t *testing.T) {
+	const ZERO = 0
+
+	numbers := goalist.Goalist[int]{ZERO, ZERO, 1, 2, 3, 4, 5}
+	firstZero := numbers.First(func(x int) bool { return x == ZERO })
+	assert.NotNil(t, firstZero)
+	assert.Equal(t, ZERO, *firstZero)
+}
+
+func TestFirstNotExists(t *testing.T) {
+	const ZERO = 0
+	numbers := goalist.Goalist[int]{1, 2, 3, 4, 5}
+	firstZero := numbers.First(func(x int) bool { return x == ZERO })
+	assert.Nil(t, firstZero)
 }

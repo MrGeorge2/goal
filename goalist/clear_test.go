@@ -3,14 +3,14 @@ package goalist_test
 import (
 	"testing"
 
-	"github.com/MrGeorge2/goal/tests/seeder"
+	"github.com/MrGeorge2/goal/goalist"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestClear(t *testing.T) {
-	carList := seeder.CreateShuffledCarList()
-	assert.NotZero(t, len(carList))
+	numbers := goalist.Goalist[int]{1, 2, 3, 4, 5}
+	assert.NotZero(t, len(numbers))
 
-	carList.Clear()
-	assert.Len(t, carList, 0)
+	numbers.Clear()
+	assert.Len(t, numbers, 0)
 }

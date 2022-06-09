@@ -3,30 +3,23 @@ package goalist_test
 import (
 	"testing"
 
-	"github.com/MrGeorge2/goal/tests/seeder"
+	"github.com/MrGeorge2/goal/goalist"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestAdd(t *testing.T) {
-	carList := seeder.CreateShuffledCarList()
-	originalLen := len(carList)
+	numbers := goalist.Goalist[int]{1, 2, 3, 4, 5}
+	originalLen := len(numbers)
 
-	// Try add
-	lada := seeder.Car{
-		Brand: "Lada",
-		ID:    100,
-		IsNew: false,
-	}
+	const ZERO = 0
 
-	carList.Add(lada)
+	numbers.Add(ZERO)
 
-	assert.Len(t, carList, originalLen+1)
+	assert.Len(t, numbers, originalLen+1)
 
-	// Try select added car
-	selectedCar := carList.First(func(x seeder.Car) bool {
-		return x == lada
-	})
+	// Try select added number
+	selectedNumber := numbers.First(func(x int) bool { return x == ZERO })
 
-	assert.NotNil(t, selectedCar)
-	assert.Equal(t, lada, *selectedCar)
+	assert.NotNil(t, selectedNumber)
+	assert.Equal(t, ZERO, *selectedNumber)
 }

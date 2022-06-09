@@ -1,6 +1,7 @@
 package goalist
 
 func (l *Goalist[T]) RemoveAt(index int) {
-	(*l)[index] = (*l)[len(*l)-1]
-	(*l) = (*l)[:len(*l)-1]
+	ret := make([]T, 0)
+	ret = append(ret, (*l)[:index]...)
+	*l = append(ret, (*l)[index+1:]...)
 }
