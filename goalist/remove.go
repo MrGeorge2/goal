@@ -7,9 +7,6 @@ func (l *Goalist[T]) Remove(predicate func(x T) bool) {
 		}
 
 		index := l.IndexOf(item)
-		if index == nil {
-			continue
-		}
 
 		l.RemoveAt(*index)
 	}

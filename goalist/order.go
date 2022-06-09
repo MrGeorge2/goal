@@ -34,12 +34,6 @@ func (l Goalist[T]) Order(predicate func(a, b T) int) Goalist[T] {
 					moved = true
 				}
 
-			} else if orderResult < 0 {
-				if l[j] != next && l[i] != actual {
-					l[j] = next
-					l[i] = actual
-					moved = true
-				}
 			}
 		}
 
