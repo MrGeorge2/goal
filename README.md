@@ -9,7 +9,7 @@ Make your life easier while working with slices and maps.
 ## Goalist
 * Type for manipulating with slices
 
-Goalist implement methods
+Goalist implements methods
 <ul>
     <li>Add</li>
     <li>AddRange</li>
@@ -38,7 +38,7 @@ Goalist implement methods
 ## Goadict
 * Type for manipulating with maps
 
-Goadict implement methods
+Goadict implements methods
 <ul>
     <li>Keys</li>
     <li>Values</li>
