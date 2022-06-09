@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestContainsKey(t *testing.T) {
+func TestContainsKeyExisting(t *testing.T) {
 	dict := goadict.Goadict[int, int]{}
 
 	const DICT_LEN = 10
@@ -19,4 +19,16 @@ func TestContainsKey(t *testing.T) {
 	for i := 0; i < dict.Count(); i++ {
 		assert.True(t, dict.ContainsKey(i))
 	}
+}
+
+func TestContainsKeyNotExisting(t *testing.T) {
+	dict := goadict.Goadict[int, int]{}
+
+	const DICT_LEN = 10
+
+	for i := 0; i < DICT_LEN; i++ {
+		dict[i] = i
+	}
+
+	assert.False(t, dict.ContainsKey(DICT_LEN+1024))
 }

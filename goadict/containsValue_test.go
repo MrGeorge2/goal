@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestContainsValue(t *testing.T) {
+func TestContainsValueExisting(t *testing.T) {
 	dict := goadict.Goadict[int, int]{}
 
 	const DICT_LEN = 10
@@ -19,4 +19,16 @@ func TestContainsValue(t *testing.T) {
 	for i := 0; i < DICT_LEN; i++ {
 		assert.True(t, dict.ContainsValue(i))
 	}
+}
+
+func TestContainsValueNotExisting(t *testing.T) {
+	dict := goadict.Goadict[int, int]{}
+
+	const DICT_LEN = 10
+
+	for i := 0; i < DICT_LEN; i++ {
+		dict[i] = i
+	}
+
+	assert.False(t, dict.ContainsValue(DICT_LEN+1024))
 }

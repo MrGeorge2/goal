@@ -10,19 +10,14 @@ import (
 func TestValues(t *testing.T) {
 	dict := goadict.Goadict[string, string]{}
 
-	dict["HELLO"] = "WORLD"
-	dict["HEY"] = "HO"
+	const WORLD = "WORLD"
+	const HO = "HO"
 
-	assert.True(t, dict.ContainsKey("HELLO"))
-	assert.True(t, dict.ContainsKey("HEY"))
+	dict["HELLO"] = WORLD
+	dict["HEY"] = HO
 
-	assert.False(t, dict.ContainsKey("WORLD"))
-	assert.False(t, dict.ContainsKey("HO"))
+	values := dict.Values()
 
-	assert.True(t, dict.ContainsValue("WORLD"))
-	assert.True(t, dict.ContainsValue("HO"))
-
-	assert.False(t, dict.ContainsValue("HELLO"))
-	assert.False(t, dict.ContainsValue("HEY"))
-
+	assert.True(t, values.Contains(WORLD))
+	assert.True(t, values.Contains(HO))
 }
