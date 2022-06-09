@@ -1,7 +1,10 @@
 # GOAL
 
 Make your life easier while working with slices and maps.
-This library is heavily inspired by C#'s Linq.
+
+## Overview
+* This library is heavily inspired by C#'s Linq.
+* Fully tested (Coverage is 100%)
 
 ## Goalist
 * Type for manipulating with slices
