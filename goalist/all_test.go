@@ -16,3 +16,8 @@ func TestAllNotExist(t *testing.T) {
 	numbers := goalist.Goalist[int]{1, 1, 1, 1}
 	assert.False(t, numbers.All(func(x int) bool { return x == 2 }))
 }
+
+func TestAllEmpty(t *testing.T) {
+	numbers := goalist.Goalist[int]{}
+	assert.False(t, numbers.All(func(x int) bool { return true }))
+}
