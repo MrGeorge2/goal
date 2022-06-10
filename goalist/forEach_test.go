@@ -34,3 +34,18 @@ func TestForEachSum(t *testing.T) {
 		sum += x
 	})
 }
+
+func TestGoForEachSum(t *testing.T) {
+	numbers := goalist.Goalist[int]{}
+
+	const SUM = 15
+	const ONE = 1
+	for i := 0; i < SUM; i++ {
+		numbers.Add(ONE)
+	}
+
+	sum := 0
+	numbers.GoForEach(func(x int) {
+		sum += x
+	})
+}
