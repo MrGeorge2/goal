@@ -5,21 +5,21 @@ package goalist
 // > 0 sort a after b
 // < osort a before b
 // 0 keep original order of a and b
-func (l Goalist[T]) Order(predicate func(a, b T) int) Goalist[T] {
+func (l *Goalist[T]) Order(predicate func(a, b T) int) {
 	sorted := false
 
 	for !sorted {
 		moved := false
 
-		for i, item := range l {
+		for i, item := range *l {
 			j := i + 1
 
-			if j >= len(l) {
+			if j >= len(*l) {
 				break
 			}
 
 			actual := item
-			next := l[j]
+			next := (*l)[j]
 
 			orderResult := predicate(actual, next)
 
@@ -27,9 +27,9 @@ func (l Goalist[T]) Order(predicate func(a, b T) int) Goalist[T] {
 				continue
 
 			} else if orderResult > 0 {
-				if l[i] != next && l[j] != actual {
-					l[i] = next
-					l[j] = actual
+				if (*l)[i] != next && (*l)[j] != actual {
+					(*l)[i] = next
+					(*l)[j] = actual
 
 					moved = true
 				}
@@ -39,6 +39,4 @@ func (l Goalist[T]) Order(predicate func(a, b T) int) Goalist[T] {
 
 		sorted = !moved
 	}
-
-	return l
 }

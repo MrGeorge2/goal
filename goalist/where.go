@@ -28,11 +28,11 @@ func (l Goalist[T]) Where(predicate func(x T) bool) Goalist[T] {
 	for index := range matchingIndexes {
 		indexes.Add(index)
 	}
+	indexes.Order(func(a, b int) int { return a - b })
 
 	// Add items matching predicate to result
 	result := Goalist[T]{}
-	orderedIndexes := indexes.Order(func(a, b int) int { return a - b })
-	for _, index := range orderedIndexes {
+	for _, index := range indexes {
 		result.Add(l[index])
 	}
 
