@@ -1,6 +1,19 @@
 package goalist
 
-import "context"
+// Return true if all values meet the predicate
+func (l Goalist[T]) Alll(predicate func(x T) bool) bool {
+	if len(l) == 0 {
+		return false
+	}
+
+	for _, item := range l {
+		if !predicate(item) {
+			return false
+		}
+	}
+
+	return true
+}
 
 // Return true if all values meet the predicate
 func (l Goalist[T]) All(predicate func(x T) bool) bool {
@@ -8,46 +21,37 @@ func (l Goalist[T]) All(predicate func(x T) bool) bool {
 		return false
 	}
 
-	allCtx, cancel := context.WithCancel(context.Background())
-	defer cancel()
-
 	doneChan := make(chan struct{}, len(l))
-	allResultChan := make(chan bool, len(l))
+	allNotFound := make(chan struct{})
 
 	for _, item := range l {
-		go func(ctx context.Context, cancelation context.CancelFunc, predicateItem T) {
-			defer func() { doneChan <- struct{}{} }()
+		go func(predicateItem T) {
+			defer func() {
+				doneChan <- struct{}{}
+			}()
 
-			for {
-				select {
-				case <-ctx.Done():
-					allResultChan <- false
-					return
-				default:
-					if !predicate(predicateItem) {
-						allResultChan <- false
-						cancelation()
-					} else {
-						allResultChan <- true
-					}
-
-					return
-				}
+			if !predicate(predicateItem) {
+				allNotFound <- struct{}{}
 			}
-		}(allCtx, cancel, item)
+		}(item)
 	}
 
 	doneCounter := 0
 	for {
 		select {
 		case <-doneChan:
-			doneCounter++
-			if doneCounter == len(l) {
-				return true
+			{
+				doneCounter++
 			}
-		case result := <-allResultChan:
-			if !result {
+		case <-allNotFound:
+			{
 				return false
+			}
+		default:
+			{
+				if doneCounter >= len(l) {
+					return true
+				}
 			}
 		}
 	}

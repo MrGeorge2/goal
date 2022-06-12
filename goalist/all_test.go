@@ -17,6 +17,11 @@ func TestAllNotExist(t *testing.T) {
 	assert.False(t, numbers.All(func(x int) bool { return x == 2 }))
 }
 
+func TestAllNotExistsLastItem(t *testing.T) {
+	numbers := goalist.Goalist[int]{1, 1, 1, 2}
+	assert.False(t, numbers.All(func(x int) bool { return x == 1 }))
+}
+
 func TestAllEmpty(t *testing.T) {
 	numbers := goalist.Goalist[int]{}
 	assert.False(t, numbers.All(func(x int) bool { return true }))
