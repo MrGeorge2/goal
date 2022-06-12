@@ -28,3 +28,16 @@ func testWhereLen(t *testing.T, count int) {
 		assert.Equal(t, ZERO, item)
 	}
 }
+
+func TestMultipleWhere(t *testing.T) {
+	numbers := goalist.Goalist[int]{1, 2, 3, 4, 5}
+
+	three := numbers.Where(func(x int) bool {
+		return x >= 3
+	}).Where(func(x int) bool {
+		return x <= 3
+	})
+
+	assert.Len(t, three, 1)
+	assert.Equal(t, 3, three[0])
+}
